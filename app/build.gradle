@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+
+apply from: 'private.gradle'
+
+ext {
+    JversionName = "1.0b"
+    JversionCode = 1
+    JversionNameSuffix = String.valueOf(JversionCode).concat(".").concat(getTimestamp())
+    JfinalVersion = ""
+
+    buildName = ""
+    apkSuffix = ""
+}
+
+android {
+    signingConfigs {
+        defProd {
+            storePassword my_keyPassword
+            storeFile file(my_storeFileName)
+            keyAlias = my_keyAlias
+            keyPassword my_keyPassword
+        }
+    }
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.mobeedom.android.auto.jy-hu-remote"
+        minSdkVersion 24
+        targetSdkVersion 29
+        versionCode JversionCode
+        versionName JversionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.defProd
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            setVersionNameSuffix(JversionNameSuffix)
+            JfinalVersion = JversionName.concat(JversionNameSuffix)
+            signingConfig signingConfigs.defProd
+            applicationVariants.all { variant ->
+                appendVersionName(variant, buildName, JfinalVersion)
+            }
+        }
+        debug {
+            crunchPngs false
+            zipAlignEnabled false
+            setVersionNameSuffix("")
+            pseudoLocalesEnabled true
+            JfinalVersion = JversionName.concat(JversionNameSuffix)
+            signingConfig signingConfigs.defProd
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+def appendVersionName(variant, buildName, customVersionName) {
+    print "appendVersionName started!!! " + buildName
+
+    variant.outputs.all {
+        variant.productFlavors.each { flavor ->
+            outputFileName = "JY-HU-Remote_${customVersionName}-${flavor.ext.apkSuffix}.apk"
+        }
+    }
+}
+
+def getTimestamp() {
+    return new Date().format('yyMMddHHmm')
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
