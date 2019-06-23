@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">HUVolRemote</string>
+    <string name="app_name">JY-HU-Remote</string>
+    <string name="toggle_recents">Toggle Recents</string>
+    <string name="volume_control">Volume Remote</string>
+    <string name="service_description">Just to toggle recents list by a shortcut</string>
 </resources>

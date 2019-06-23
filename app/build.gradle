@@ -23,7 +23,7 @@ android {
     }
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.mobeedom.android.auto.jy-hu-remote"
+        applicationId "com.mobeedom.android.auto.jyhuremote"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode JversionCode
