@@ -15,11 +15,11 @@ import static com.mobeedom.android.auto.jyhuremote.App.LOG_TAG;
 
 
 public class ServiceWorker {
-    static final int DEFAULT_TIMEOUT = 1000;
+    static final int DEFAULT_TICK = 2000;
 
     static ServiceWorker mInstance;
 
-    int timeout = DEFAULT_TIMEOUT;
+    int timeout = DEFAULT_TICK;
     ScheduledExecutorService service;
     Runnable runnable;
     Listener unregisteredPackageListener;

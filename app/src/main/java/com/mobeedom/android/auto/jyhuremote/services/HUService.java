@@ -110,7 +110,7 @@ public class HUService extends Service implements ServiceWorker.Listener {
 
     @Override
     public boolean onTimerTick(String lastProcess, boolean wasNotified) {
-//        Log.v(LOG_TAG, String.format("HUService.onTimerTick: "));
+        Log.v(LOG_TAG, String.format("HUService.onTimerTick: "));
         return false;
     }
 

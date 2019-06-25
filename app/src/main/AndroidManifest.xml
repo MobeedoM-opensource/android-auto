@@ -54,10 +54,13 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
+                <action android:name="com.fyt.boot.ACCON"/>
+
                 <action android:name="com.mobeedom.android.hu.VOL_UP"/>
                 <action android:name="com.mobeedom.android.hu.VOL_DOWN"/>
                 <action android:name="com.mobeedom.android.hu.VOL_MUTE_SWITCH"/>
                 <action android:name="com.mobeedom.android.hu.VOL_LEVEL"/>
+                <action android:name="BT_STANDARD_BROADCAST_CMD"/>
             </intent-filter>
         </service>
         <service
@@ -74,6 +77,10 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
         </service>
+        <service
+            android:name=".services.jobs.PingerService"
+            android:label="Word service"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver
             android:name=".receivers.BootReceiver"

@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.mobeedom.android.auto.jyhuremote.helpers.MediaKeysMapper;
+
 import static com.mobeedom.android.auto.jyhuremote.App.LOG_TAG;
 
 public class ToggleService extends AccessibilityService {
@@ -44,12 +46,8 @@ public class ToggleService extends AccessibilityService {
         int action = event.getAction();
         int keyCode = event.getKeyCode();
         if (action == KeyEvent.ACTION_UP) {
-            Log.v(LOG_TAG, String.format("ToggleService.onKeyEvent: "));
-            if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-                Log.d("Hello", "KeyUp");
-            } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-                Log.d("Hello", "KeyDown");
-            }
+            Log.v(LOG_TAG, String.format("ToggleService.onKeyEvent: %d", keyCode));
+            MediaKeysMapper.translateFromKeyboard(keyCode, true);
             return true;
         } else {
             return super.onKeyEvent(event);

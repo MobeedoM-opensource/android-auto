@@ -34,19 +34,18 @@ public class HUIntentService extends IntentService {
         super.onCreate();
 
         NotificationHelper.startForeground(this);
-
-        Log.v(LOG_TAG, String.format("HUIntentService.onCreate: "));
     }
 
     /**
      * example am start-foreground-service -a com.mobeedom.android.hu.VOL_UP
-     * example am start-foreground-service -a com.mobeedom.android.hu.CUSTOM_MODULE -ei "MODULE" 4 -ei "CODE" 0 -ei "PARAM" 17
-     * example am start-foreground-service -n com.mobeedom.android.test.testhu04/.services.HUIntentService -a com.mobeedom.android.hu.CUSTOM_MODULE --ei "MODULE" 4 --ei "CODE" 0 --ei "PARAM" 17
+     * example am start-foreground-service -a com.mobeedom.android.hu.CUSTOM_MODULE --ei "MODULE" 4 --ei "CODE" 0 -ei "PARAM" 17
+     * example am start-foreground-service -n com.mobeedom.android.auto.jyhuremote/.services.HUIntentService -a com.mobeedom.android.hu.CUSTOM_MODULE --ei "MODULE" 4 --ei "CODE" 0 --ei "PARAM" 15
+     * example 0 20 1-2 play/pause ModuleMain C_VA_CMD VA_CMD_KEY_PLAY
      * @param intent
      */
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.v(LOG_TAG, String.format("HUIntentService.onHandleIntent: %s", intent.getAction()));
+        Log.v(LOG_TAG, String.format("HUIntentService.onHandleIntent: %s %s", intent.getAction(), intent.getExtras()));
 
         if (intent != null) {
             final String action = intent.getAction();

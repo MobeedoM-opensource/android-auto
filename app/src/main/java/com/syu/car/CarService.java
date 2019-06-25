@@ -82,6 +82,7 @@ public class CarService {
         tools.enableModule(0, this.MCU_LOOK_CODE);
         tools.enableModule(1, this.MCU_LOOK_CODE);
         tools.enableModule(4, this.SOUND_LOOK_CODE);
+        tools.enableModule(5, this.IPOD_LOOK_CODE);
         tools.enableModule(2, this.BT_LOOK_CODE);
         tools.enableModule(7, this.CANBUS_LOOK_CODE);
     }

@@ -6,7 +6,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.syu.ipcself.Conn;
+import com.syu.ipcself.ConnSys;
+
 public class MainActivity extends BaseActivity {
+    private ConnSys mConnSys;
+    private Conn mConn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +42,11 @@ public class MainActivity extends BaseActivity {
             }
         });
         findViewById(R.id.btnTest).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                App.getServiceSteer().getTools().sendInt(4, 0, 12);
+                mConn = new Conn(App.getInstance(), App.getInstance());
+                mConnSys = new ConnSys(App.getInstance(), App.getInstance());
             }
         });
 

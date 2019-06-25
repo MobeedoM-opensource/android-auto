@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
-    android:accessibilityEventTypes="typeAnnouncement"
+    android:accessibilityEventTypes="typeAllMask"
     android:accessibilityFeedbackType="feedbackGeneric"
-    android:accessibilityFlags=""
+    android:accessibilityFlags="flagIncludeNotImportantViews|flagRequestFilterKeyEvents"
     android:canRetrieveWindowContent="false"
+    android:canRequestFilterKeyEvents="true"
     android:description="@string/service_description"
     android:notificationTimeout="100"
-    android:packageNames="com.mobeedom.android.auto.jyhuremote"
     android:settingsActivity="com.mobeedom.android.auto.jyhuremote.ShowRecents" />

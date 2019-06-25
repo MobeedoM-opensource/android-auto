@@ -61,7 +61,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/btnTest"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
