@@ -69,7 +69,7 @@
             android:name=".services.ToggleService"
             android:enabled="true"
             android:exported="false"
-            android:label="Toggle Recents HU"
+            android:label="@string/service_name"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />

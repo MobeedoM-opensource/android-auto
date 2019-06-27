@@ -39,8 +39,6 @@ public class MediaKeysMapper {
                     App.getInstance().radioNext();
                 else if(fgPackage.startsWith(SYU_GENERIC_PACKAGE))
                     App.getInstance().playerCommand(FinalMain.VA_CMD_KEY_SKIPF);
-                else if(SYU_BT_PACKAGE.equals(fgPackage))
-                    App.getInstance().radioNext();
                 else
                     App.getInstance().mediaNext();
                 break;
@@ -50,8 +48,6 @@ public class MediaKeysMapper {
                     App.getInstance().radioPrev();
                 else if(fgPackage.startsWith(SYU_GENERIC_PACKAGE))
                     App.getInstance().playerCommand(FinalMain.VA_CMD_KEY_SKIPB);
-                else if(SYU_BT_PACKAGE.equals(fgPackage))
-                    App.getInstance().radioPrev();
                 else
                     App.getInstance().mediaPrev();
                 break;

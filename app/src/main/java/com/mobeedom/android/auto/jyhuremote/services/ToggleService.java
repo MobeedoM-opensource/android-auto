@@ -44,15 +44,19 @@ public class ToggleService extends AccessibilityService {
                         event.getClassName().toString()
                 );
 
-                if(!event.getPackageName().toString().startsWith("android") && !event.getPackageName().toString().startsWith("com.android.systemui"))
-                    App.getInstance().setCurrentForegroundPackage(event.getPackageName().toString());
-
                 ActivityInfo activityInfo = tryGetActivity(componentName);
                 boolean isActivity = activityInfo != null;
-                if (isActivity)
+                if (isActivity) {
                     Log.v(LOG_TAG, String.format("ToggleService.onAccessibilityEvent: %s", componentName.flattenToShortString()));
-                else
+                    // excluding system packages to prevent stealing focus, only activities
+                    if(!event.getPackageName().toString().startsWith("android")
+                            && !event.getPackageName().toString().startsWith("com.android.systemui")
+                            && !event.getPackageName().toString().startsWith("com.syu.ms")) {
+                        App.getInstance().setCurrentForegroundPackage(event.getPackageName().toString());
+                    }
+                } else {
                     Log.v(LOG_TAG, String.format("ToggleService.onAccessibilityEvent: %s", event.getPackageName().toString()));
+                }
             }
         }
 
