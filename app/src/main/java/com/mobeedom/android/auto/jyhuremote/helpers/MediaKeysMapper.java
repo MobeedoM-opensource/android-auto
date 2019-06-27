@@ -69,7 +69,7 @@ public class MediaKeysMapper {
                 App.getInstance().customModuleManager(FinalMainServer.MODULE_CODE_BT, FinalBt.C_HANG, 0);
                 break;
             case KeyEvent.KEYCODE_F4: // M: Toggle recents
-                ToggleService.getInstance().doAction();
+                execKeyCode(KeyEvent.KEYCODE_VOICE_ASSIST);
                 break;
             // ****************
             // START LONG PRESS KEYCODES
@@ -85,7 +85,7 @@ public class MediaKeysMapper {
                 App.getInstance().customModuleManager(FinalMainServer.MODULE_CODE_BT, FinalBt.C_HANG, 0);
                 break;
             case KeyEvent.KEYCODE_F8: // M Long Press
-                execKeyCode(KeyEvent.KEYCODE_VOICE_ASSIST);
+                ToggleService.getInstance().doAction();
                 break;
             case KeyEvent.KEYCODE_F9: // MEDIA_PLAY/PAUSE Long Press
                 Toast.makeText(App.getInstance(), String.valueOf(keyCode), Toast.LENGTH_SHORT).show();
