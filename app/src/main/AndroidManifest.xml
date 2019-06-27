@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobeedom.android.auto.jyhuremote">
 
+    <uses-permission android:name="android.permission.DUMP"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"

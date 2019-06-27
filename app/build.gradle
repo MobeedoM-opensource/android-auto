@@ -4,7 +4,7 @@ apply from: 'private.gradle'
 
 ext {
     JversionName = "1.0b"
-    JversionCode = 1
+    JversionCode = 2
     JversionNameSuffix = String.valueOf(JversionCode).concat(".").concat(getTimestamp())
     JfinalVersion = ""
 
@@ -34,6 +34,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            crunchPngs true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             setVersionNameSuffix(JversionNameSuffix)
@@ -44,7 +45,7 @@ android {
             }
         }
         debug {
-            crunchPngs false
+            crunchPngs true
             zipAlignEnabled false
             setVersionNameSuffix("")
             pseudoLocalesEnabled true
@@ -62,9 +63,7 @@ def appendVersionName(variant, buildName, customVersionName) {
     print "appendVersionName started!!! " + buildName
 
     variant.outputs.all {
-        variant.productFlavors.each { flavor ->
-            outputFileName = "JY-HU-Remote_${customVersionName}-${flavor.ext.apkSuffix}.apk"
-        }
+       outputFileName = "JY-HU-Remote_${customVersionName}.apk"
     }
 }
 
@@ -76,6 +75,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

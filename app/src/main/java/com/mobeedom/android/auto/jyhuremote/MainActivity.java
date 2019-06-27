@@ -6,12 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.syu.ipcself.Conn;
-import com.syu.ipcself.ConnSys;
 
 public class MainActivity extends BaseActivity {
-    private ConnSys mConnSys;
-    private Conn mConn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +41,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onClick(View view) {
-                mConn = new Conn(App.getInstance(), App.getInstance());
-                mConnSys = new ConnSys(App.getInstance(), App.getInstance());
             }
         });
 

@@ -3,27 +3,27 @@ package com.mobeedom.android.auto.jyhuremote;
 import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
+import android.view.KeyEvent;
 
 import com.mobeedom.android.auto.jyhuremote.services.HUService;
 import com.mobeedom.android.auto.jyhuremote.services.ToggleService;
 import com.mobeedom.android.auto.jyhuremote.util.Util;
 import com.syu.car.CarService;
 import com.syu.ipc.FinalMainServer;
-import com.syu.ipc.IRemoteToolkit;
+import com.syu.ipc.data.FinalMain;
 import com.syu.ipc.data.FinalRadio;
 import com.syu.ipc.data.FinalSound;
-import com.syu.ipcself.IConnStateListener;
 import com.syu.steer.CarServiceForSteer;
-import com.syu.util.InterfaceApp;
 
-public class App extends Application implements InterfaceApp, IConnStateListener {
+public class App extends Application {
     public static final String LOG_TAG = "MY_HUREMOTE";
     private static App mInstance;
 
     private CarService mService;
     private CarServiceForSteer mServiceSteer;
     private ToggleService mToggleService = ToggleService.getInstance();
+
+    private String mCurrentForegroundPackage = "";
 
     @Override
     public void onCreate() {
@@ -38,6 +38,14 @@ public class App extends Application implements InterfaceApp, IConnStateListener
 //        startCustomLooper();
     }
 
+    public String getCurrentForegroundPackage() {
+        // to avoid NPE
+        return ""+mCurrentForegroundPackage;
+    }
+
+    public void setCurrentForegroundPackage(String currentForegroundPackage) {
+        mCurrentForegroundPackage = currentForegroundPackage;
+    }
 
     public ToggleService getToggleService() {
         if(mToggleService == null)
@@ -87,6 +95,21 @@ public class App extends Application implements InterfaceApp, IConnStateListener
         App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_RADIO, FinalRadio.C_PREV_CHANNEL);
     }
 
+    public void mediaPlayPause() {
+        App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_MAIN, FinalMain.C_KEY, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+    }
+
+    public void mediaNext() {
+        App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_MAIN, FinalMain.C_KEY, KeyEvent.KEYCODE_MEDIA_NEXT);
+    }
+    public void mediaPrev() {
+        App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_MAIN, FinalMain.C_KEY, KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+    }
+
+    public void playerCommand(int cmd) {
+        App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_MAIN, FinalMain.C_VA_CMD, cmd);
+    }
+
     public void customModuleManager(final int module, final int command, final int... params) {
         if(module == 1 || module == 10)
             App.getServiceSteer().getTools().sendInt(module, command, params);
@@ -110,73 +133,5 @@ public class App extends Application implements InterfaceApp, IConnStateListener
 
     public static App getInstance() {
         return mInstance;
-    }
-
-    @Override
-    public void cmdObdFlagStop(int i) {
-        Log.d(LOG_TAG, String.format("App.cmdObdFlagStop: "));
-    }
-
-    @Override
-    public int getCameraId() {
-        Log.v(LOG_TAG, String.format("App.getCameraId: "));
-        return 0;
-    }
-
-    @Override
-    public boolean isAppTop() {
-        Log.v(LOG_TAG, String.format("App.isAppTop: "));
-        return false;
-    }
-
-    @Override
-    public void notify_startCamera() {
-        Log.v(LOG_TAG, String.format("App.notify_startCamera: "));
-    }
-
-    @Override
-    public void notify_stopCamera() {
-        Log.v(LOG_TAG, String.format("App.notify_stopCamera: "));
-    }
-
-    @Override
-    public void onConnected_Main() {
-        Log.v(LOG_TAG, String.format("App.onConnected_Main: "));
-    }
-
-    @Override
-    public void onConnected_Sound() {
-        Log.v(LOG_TAG, String.format("App.onConnected_Sound: "));
-    }
-
-    @Override
-    public void requestAppIdRight() {
-        Log.v(LOG_TAG, String.format("App.requestAppIdRight: "));
-    }
-
-    @Override
-    public void setCameraCallBack() {
-        Log.v(LOG_TAG, String.format("App.setCameraCallBack: "));
-    }
-
-    @Override
-    public void setPreviewFormat() {
-        Log.v(LOG_TAG, String.format("App.setPreviewFormat: "));
-    }
-
-    @Override
-    public String updateOsdInfo_Dvd(int[] iArr) {
-        Log.v(LOG_TAG, String.format("App.updateOsdInfo_Dvd: "));
-        return null;
-    }
-
-    @Override
-    public void onConnected(IRemoteToolkit iRemoteToolkit) {
-        Log.v(LOG_TAG, String.format("App.onConnected: "));
-    }
-
-    @Override
-    public void onDisconnected() {
-        Log.v(LOG_TAG, String.format("App.onDisconnected: "));
     }
 }
