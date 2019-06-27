@@ -95,6 +95,13 @@ public class App extends Application {
         App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_RADIO, FinalRadio.C_PREV_CHANNEL);
     }
 
+    public void radioSeekDown() {
+        App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_RADIO, FinalRadio.C_SEEK_DOWN);
+    }
+    public void radioSeekUp() {
+        App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_RADIO, FinalRadio.C_SEEK_UP);
+    }
+
     public void mediaPlayPause() {
         App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_MAIN, FinalMain.C_KEY, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
     }
@@ -104,6 +111,14 @@ public class App extends Application {
     }
     public void mediaPrev() {
         App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_MAIN, FinalMain.C_KEY, KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+    }
+
+    public void mediaSF() {
+        App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_MAIN, FinalMain.C_KEY, KeyEvent.KEYCODE_MEDIA_SKIP_FORWARD);
+    }
+
+    public void mediaSB() {
+        App.getServiceSteer().getTools().sendInt(FinalMainServer.MODULE_CODE_MAIN, FinalMain.C_KEY, KeyEvent.KEYCODE_MEDIA_SKIP_BACKWARD);
     }
 
     public void playerCommand(int cmd) {

@@ -4,4 +4,8 @@
     <string name="volume_control">Volume Remote</string>
     <string name="service_name">HU-Remote Service</string>
     <string name="service_description">For steering wheel buttons</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="only_broadcast">Only broadcast</string>
+    <string name="only_broadcast_descr">When a keypress is detected, the service only broadcast an Intent and skips the internal processing.</string>
 </resources>

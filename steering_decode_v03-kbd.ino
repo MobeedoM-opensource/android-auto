@@ -62,6 +62,11 @@ int BASE=650;
 int tolerance = 25;
 boolean skip = false;
 
+// to detect longpress
+int nLoop = 0;
+int nLoop2 = 0;
+int NLOOP_LONGPRESS = 60;
+
 void setup() {
   // initialize serial communication with computer:
   Serial.begin(9600);
@@ -95,6 +100,7 @@ void loop() {
   average = total / numReadings;
 
   if(average < BASE) {
+    nLoop++;
     if(localMin > average)
        localMin = average;
   } else {
@@ -103,10 +109,11 @@ void loop() {
       for(int i=0; i<10; ++i) {
         int delta = KEYS[i] - localMin;
         if(abs(delta) < tolerance) {
-          manageKey(i);
+          manageKey(i, nLoop);
           break;
         }
       }
+      nLoop=0;
     }
     localMin = 1000;
   }
@@ -132,56 +139,66 @@ void loop() {
 
   String out2 = "A3" + average2;
   if(average2 < BASE) {
+    nLoop2++;
     if(localMin2 > average2)
        localMin2 = average2;
   } else {
-    if(localMin2 < 1000 && !skip)
+    if(localMin2 < 1000 && !skip) {
 //      Serial.println(localMin2);
       for(int i=0; i<10; ++i) {
         int delta = KEYS[i] - localMin2;
         if(abs(delta) < tolerance) {
-          manageKey(i);
+          manageKey(i, nLoop2);
           break;
         }
       }
+      nLoop2 = 0;
+    }
     localMin2 = 1000;
   }
     
   delay(10);        // delay in between reads for stability
 }
 
-void manageKey(int key) {
+void manageKey(int key, int nloop) {
 // GPS, CALL+, CALL-, M, STOP, VOL+, VOL-, MUTE, NEXT, PREV
+    boolean singlePress = nloop < NLOOP_LONGPRESS;
     switch(key) {
       case 0:
-       Keyboard.write(KEY_F1); // KEYCODE_F1
+       Keyboard.write((singlePress ? KEY_F1 : KEY_F5)); // KEYCODE_F1
       break;
       case 1:
-       Keyboard.write(KEY_F2); // 
+       Keyboard.write((singlePress ? KEY_F2 : KEY_F6)); // 
       break;
       case 2:
-       Keyboard.write(KEY_F3); // 
+       Keyboard.write((singlePress ? KEY_F3 : KEY_F7)); // 
       break;
       case 3:
-       Keyboard.write(KEY_F4);// 
+       Keyboard.write((singlePress ? KEY_F4 : KEY_F8));// 
       break;
       case 4:
-       Consumer.write(MEDIA_PLAY_PAUSE);
+       Consumer.write((singlePress ? MEDIA_PLAY_PAUSE : KEY_F9));
        break;
       case 5:
-       Consumer.write(MEDIA_VOL_UP);
+       Consumer.write((singlePress ? MEDIA_VOL_UP : KEY_F10));
        break;
       case 6:
-       Consumer.write(MEDIA_VOL_DOWN);
+       Consumer.write((singlePress ? MEDIA_VOL_DOWN : KEY_F11));
        break;
       case 7:
-       Consumer.write(MEDIA_VOL_MUTE);
+       Consumer.write((singlePress ? MEDIA_VOL_MUTE : KEY_F12));
        break;
       case 8:
-       Consumer.write(MEDIA_NEXT);
+       if(singlePress)
+        Consumer.write(MEDIA_NEXT);
+       else
+        Keyboard.write(KEY_RIGHT_SHIFT);// 
        break;
       case 9:
-       Consumer.write(MEDIA_PREV);
+       if(singlePress)
+        Consumer.write(MEDIA_PREV);
+       else
+        Keyboard.write(KEY_LEFT_SHIFT);// 
       break;
     }
 }

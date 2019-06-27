@@ -2,6 +2,7 @@ package com.mobeedom.android.auto.jyhuremote.services;
 
 import android.accessibilityservice.AccessibilityService;
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
@@ -10,6 +11,9 @@ import android.view.accessibility.AccessibilityEvent;
 
 import com.mobeedom.android.auto.jyhuremote.App;
 import com.mobeedom.android.auto.jyhuremote.helpers.MediaKeysMapper;
+import com.mobeedom.android.auto.jyhuremote.receivers.IntentReceiver;
+
+import androidx.preference.PreferenceManager;
 
 import static com.mobeedom.android.auto.jyhuremote.App.LOG_TAG;
 
@@ -81,7 +85,14 @@ public class ToggleService extends AccessibilityService {
         int keyCode = event.getKeyCode();
         if (action == KeyEvent.ACTION_UP) {
             Log.v(LOG_TAG, String.format("ToggleService.onKeyEvent UP: %d", keyCode));
-            MediaKeysMapper.translateFromKeyboard(keyCode, App.getInstance().getCurrentForegroundPackage());
+
+            Intent keyPressedEvent = new Intent(IntentReceiver.INTENT_KEY_PRESSED);
+            keyPressedEvent.putExtra(IntentReceiver.INTENT_CODE, keyCode);
+            keyPressedEvent.putExtra(IntentReceiver.INTENT_PKG, App.getInstance().getCurrentForegroundPackage());
+            sendBroadcast(keyPressedEvent);
+
+            if(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("onlyBroadcast", false))
+                MediaKeysMapper.translateFromKeyboard(keyCode, App.getInstance().getCurrentForegroundPackage());
             return true;
         } else {
             return super.onKeyEvent(event);

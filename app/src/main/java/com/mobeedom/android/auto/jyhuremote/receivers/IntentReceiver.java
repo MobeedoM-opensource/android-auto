@@ -8,6 +8,8 @@ import android.util.Log;
 import static com.mobeedom.android.auto.jyhuremote.App.LOG_TAG;
 
 public class IntentReceiver extends BroadcastReceiver {
+    public static final String INTENT_KEY_PRESSED = "com.mobeedom.android.hu.KEY_PRESSED";
+
     public static final String INTENT_VOLUP = "com.mobeedom.android.hu.VOL_UP";
     public static final String INTENT_VOLDOWN = "com.mobeedom.android.hu.VOL_DOWN";
     public static final String INTENT_VOLMUTE = "com.mobeedom.android.hu.VOL_MUTE_SWITCH";
@@ -17,6 +19,7 @@ public class IntentReceiver extends BroadcastReceiver {
     public static final String INTENT_CUSTOM_MODULE2 = "com.mobeedom.android.hu.CUSTOM_MODULE2";
     public static final String INTENT_MODULE = "MODULE";
     public static final String INTENT_CODE = "CODE";
+    public static final String INTENT_PKG = "PKG";
 
     @Override
     public void onReceive(Context context, Intent intent) {

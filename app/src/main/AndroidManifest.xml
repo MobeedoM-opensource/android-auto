@@ -2,38 +2,48 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobeedom.android.auto.jyhuremote">
 
-    <uses-permission android:name="android.permission.DUMP"/>
+    <uses-permission android:name="android.permission.DUMP" />
 
     <application
         android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mobeedom.android.auto.jyhuremote.MainActivity" />
+        </activity>
+        <activity
             android:name=".ShowRecents"
-            android:label="@string/toggle_recents"
             android:excludeFromRecents="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/toggle_recents"
             android:launchMode="singleTop"
-            android:noHistory="true"
-            android:icon="@drawable/ic_launcher">
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/volume_control"
-            android:icon="@drawable/ic_remote"
             android:excludeFromRecents="true"
+            android:icon="@drawable/ic_remote"
+            android:label="@string/volume_control"
             android:launchMode="singleTop"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -50,19 +60,17 @@
             android:name=".services.HUService"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".services.HUIntentService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.fyt.boot.ACCON"/>
-
-                <action android:name="com.mobeedom.android.hu.VOL_UP"/>
-                <action android:name="com.mobeedom.android.hu.VOL_DOWN"/>
-                <action android:name="com.mobeedom.android.hu.VOL_MUTE_SWITCH"/>
-                <action android:name="com.mobeedom.android.hu.VOL_LEVEL"/>
-                <action android:name="BT_STANDARD_BROADCAST_CMD"/>
+                <action android:name="com.fyt.boot.ACCON" />
+                <action android:name="com.mobeedom.android.hu.VOL_UP" />
+                <action android:name="com.mobeedom.android.hu.VOL_DOWN" />
+                <action android:name="com.mobeedom.android.hu.VOL_MUTE_SWITCH" />
+                <action android:name="com.mobeedom.android.hu.VOL_LEVEL" />
+                <action android:name="BT_STANDARD_BROADCAST_CMD" />
             </intent-filter>
         </service>
         <service
