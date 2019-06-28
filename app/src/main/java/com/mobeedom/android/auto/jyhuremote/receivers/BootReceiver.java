@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.mobeedom.android.auto.jyhuremote.util.Util;
+
 import static com.mobeedom.android.auto.jyhuremote.App.LOG_TAG;
 
 public class BootReceiver extends BroadcastReceiver {
@@ -14,6 +16,6 @@ public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.v(LOG_TAG, String.format("BootReceiver.onReceive: "));
-//        Util.scheduleJob(context);
+        Util.startAccessibilityService();
     }
 }

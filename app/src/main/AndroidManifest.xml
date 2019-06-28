@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobeedom.android.auto.jyhuremote">
 
+    <uses-feature android:name="android.hardware.usb.host" />
     <uses-permission android:name="android.permission.DUMP" />
 
     <application
@@ -55,6 +56,13 @@
             android:launchMode="singleTop"
             android:noHistory="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".USBReceiverActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".services.HUService"
@@ -87,10 +95,6 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
         </service>
-        <service
-            android:name=".services.jobs.PingerService"
-            android:label="Word service"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver
             android:name=".receivers.BootReceiver"
@@ -98,6 +102,14 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.IntentReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
             </intent-filter>
         </receiver>
     </application>

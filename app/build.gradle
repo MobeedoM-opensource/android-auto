@@ -4,7 +4,7 @@ apply from: 'private.gradle'
 
 ext {
     JversionName = "1.0b"
-    JversionCode = 2
+    JversionCode = 3
     JversionNameSuffix = String.valueOf(JversionCode).concat(".").concat(getTimestamp())
     JfinalVersion = ""
 

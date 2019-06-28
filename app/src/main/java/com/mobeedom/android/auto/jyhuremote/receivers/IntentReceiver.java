@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.mobeedom.android.auto.jyhuremote.util.Util;
+
 import static com.mobeedom.android.auto.jyhuremote.App.LOG_TAG;
 
 public class IntentReceiver extends BroadcastReceiver {
@@ -25,13 +27,20 @@ public class IntentReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(LOG_TAG, "Intent receiver: received intent");
 
-        if (intent.getData() == null)
-            return;
+//        if (intent.getData() == null)
+//            return;
 
         String data = intent.getData().toString().replace("package:", "");
         String action = intent.getAction();
 
         Log.d(LOG_TAG, "Action: " + action);
         Log.d(LOG_TAG, "Data: " + data);
+
+        if("android.hardware.usb.action.USB_DEVICE_ATTACHED".equals(action))
+            enableAccessibilityService();
+    }
+
+    protected void enableAccessibilityService() {
+        Util.startAccessibilityService();
     }
 }

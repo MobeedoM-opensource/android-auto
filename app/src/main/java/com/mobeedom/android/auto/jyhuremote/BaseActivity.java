@@ -42,7 +42,8 @@ abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onNewIntent(Intent intent) {
-        if(decodeIntent(intent))
+        super.onNewIntent(intent);
+        if (decodeIntent(intent))
             finish();
     }
 }
