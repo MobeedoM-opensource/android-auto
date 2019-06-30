@@ -23,4 +23,19 @@ public class Util {
         }
     }
 
+    public static void triggerRootRequest() {
+        try {
+            Runtime.getRuntime().exec(new String[] {"su", "-c","echo", "zz"});
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error in onCreate", e);
+        }
+    }
+
+    public static boolean in(String key, String... values) {
+        for (String value : values) {
+            if(key.equals(value))
+                return true;
+        }
+        return false;
+    }
 }

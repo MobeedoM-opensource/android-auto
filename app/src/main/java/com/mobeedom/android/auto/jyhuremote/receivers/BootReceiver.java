@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.mobeedom.android.auto.jyhuremote.util.Util;
 
@@ -17,5 +18,6 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.v(LOG_TAG, String.format("BootReceiver.onReceive: "));
         Util.startAccessibilityService();
+        Toast.makeText(context, "Starting accessibility service: from boot receiver", Toast.LENGTH_SHORT).show();
     }
 }

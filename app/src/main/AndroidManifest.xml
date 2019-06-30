@@ -3,7 +3,9 @@
     package="com.mobeedom.android.auto.jyhuremote">
 
     <uses-feature android:name="android.hardware.usb.host" />
+
     <uses-permission android:name="android.permission.DUMP" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".App"
@@ -56,10 +58,13 @@
             android:launchMode="singleTop"
             android:noHistory="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <activity android:name=".USBReceiverActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
             </intent-filter>
         </activity>
@@ -74,6 +79,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="com.fyt.boot.ACCON" />
+                <action android:name="com.glsx.boot.ACCON" />
                 <action android:name="com.mobeedom.android.hu.VOL_UP" />
                 <action android:name="com.mobeedom.android.hu.VOL_DOWN" />
                 <action android:name="com.mobeedom.android.hu.VOL_MUTE_SWITCH" />

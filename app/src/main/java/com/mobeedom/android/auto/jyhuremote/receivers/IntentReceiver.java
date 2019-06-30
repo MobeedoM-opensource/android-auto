@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.mobeedom.android.auto.jyhuremote.util.Util;
 
@@ -36,8 +37,10 @@ public class IntentReceiver extends BroadcastReceiver {
         Log.d(LOG_TAG, "Action: " + action);
         Log.d(LOG_TAG, "Data: " + data);
 
-        if("android.hardware.usb.action.USB_DEVICE_ATTACHED".equals(action))
+        if(Util.in(action, "android.hardware.usb.action.USB_DEVICE_ATTACHED", "com.fyt.boot.ACCON", "com.glsx.boot.ACCON")) {
             enableAccessibilityService();
+            Toast.makeText(context, String.format("Starting accessibility service: action %s", action), Toast.LENGTH_LONG).show();
+        }
     }
 
     protected void enableAccessibilityService() {

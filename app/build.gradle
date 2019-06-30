@@ -4,7 +4,7 @@ apply from: 'private.gradle'
 
 ext {
     JversionName = "1.0b"
-    JversionCode = 3
+    JversionCode = 4
     JversionNameSuffix = String.valueOf(JversionCode).concat(".").concat(getTimestamp())
     JfinalVersion = ""
 
@@ -24,7 +24,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.mobeedom.android.auto.jyhuremote"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode JversionCode
         versionName JversionName

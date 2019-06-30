@@ -1,15 +1,12 @@
 package com.mobeedom.android.auto.jyhuremote;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import java.io.IOException;
+import com.mobeedom.android.auto.jyhuremote.util.Util;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
-
-import static com.mobeedom.android.auto.jyhuremote.App.LOG_TAG;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -17,11 +14,8 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
-        try {
-            Runtime.getRuntime().exec(new String[] {"su", "-c","echo", "zz"});
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "Error in onCreate", e);
-        }
+
+        Util.triggerRootRequest();
 
         getSupportFragmentManager()
                 .beginTransaction()

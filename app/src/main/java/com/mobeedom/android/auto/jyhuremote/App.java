@@ -34,7 +34,6 @@ public class App extends Application {
         mService = CarService.getmService(getBaseContext());
         mServiceSteer = CarServiceForSteer.getmService(getBaseContext());
         mToggleService = ToggleService.getInstance();
-
 //        startCustomLooper();
     }
 

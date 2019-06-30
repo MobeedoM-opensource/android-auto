@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.mobeedom.android.auto.jyhuremote.util.Util;
+
 
 public class MainActivity extends BaseActivity {
 
@@ -16,6 +18,7 @@ public class MainActivity extends BaseActivity {
 
         setContentView(R.layout.activity_main);
 
+        Util.triggerRootRequest();
 
         findViewById(R.id.imgSettings).setOnClickListener(view -> startActivity(new Intent(this, SettingsActivity.class)));
 
