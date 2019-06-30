@@ -1,6 +1,7 @@
 package com.mobeedom.android.auto.jyhuremote.util;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 
 import java.io.IOException;
@@ -15,6 +16,10 @@ public class Util {
     }
 
     public static void startAccessibilityService() {
+        new Handler().postDelayed(() -> startAccessibilityServiceNoDelay(), 500);
+    }
+
+    public static void startAccessibilityServiceNoDelay() {
         try {
             Runtime.getRuntime().exec(new String[] {"su", "-c","settings put secure enabled_accessibility_services"
                     , "com.mobeedom.android.auto.jyhuremote/com.mobeedom.android.auto.jyhuremote.services.ToggleService"});
